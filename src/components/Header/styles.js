@@ -18,14 +18,24 @@ export const Content = styled.div`
     align-items: center;
 
     img {
-      margin-right: 20px;
-      padding-right: 20px;
+      margin-right: 10px;
+      padding-right: 10px;
+    }
+
+    strong {
+      height: 30px;
+      align-items: center;
+      padding-top: 6px;
+      margin-right: 24px;
+      padding-right: 24px;
       border-right: 1px solid #eee;
+      color: #de3b3b;
     }
 
     a {
+      padding-left: 10px;
       font-weight: bold;
-      color: #7159c1;
+      color: #999999;
     }
   }
 
@@ -48,6 +58,16 @@ export const Profile = styled.div`
     strong {
       display: block;
       color: #333;
+    }
+
+    button {
+      background-color: Transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+      color: #de3b3b;
     }
 
     a {

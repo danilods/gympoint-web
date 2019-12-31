@@ -1,12 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import * as actions from '../../store/modules/auth/actions';
 
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo-2.png';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -23,7 +22,6 @@ export default function SignIn() {
 
   function handleSubmit({ email, password }) {
     dispatch(actions.signInRequest(email, password));
-    console.tron.log({ dispatchLog: email, password });
   }
 
   return (
@@ -31,16 +29,23 @@ export default function SignIn() {
       <img src={logo} alt="GoBarber" />
 
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="email" placeholder="Seu e-mail" />
+        <label htmlFor="email">
+          SEU E-MAIL
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="exemplo@email.com"
+          />
+        </label>
 
-        <Input
-          name="password"
-          type="password"
-          placeholder="Sua senha secreta"
-        />
-
-        <button type="submit">{loading ? 'Carregando...' : 'Acessar'}</button>
-        <Link to="/register">Criar conta gratuita</Link>
+        <label htmlFor="password">
+          SUA SENHA
+          <Input name="password" type="password" placeholder="*********" />
+          <button type="submit">
+            {loading ? 'Carregando...' : 'Entrar no sistema'}
+          </button>
+        </label>
       </Form>
     </>
   );

@@ -3,40 +3,61 @@ import { darken } from 'polished';
 
 export const Wrapper = styled.div`
   height: 100%;
-  background: linear-gradient(-90deg, #7159c1, #ab59c1);
+  background: #ee4d64;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const Content = styled.div`
-  width: 100%;
-  max-width: 315px;
+  width: 360px;
+  height: 448px;
   text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ffffff;
+
+  img {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
 
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 60px;
+    align-items: center;
+
+    label {
+      width: 300px;
+      height: 75px;
+      text-align: left;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #444444;
+    }
 
     input {
-      background: rgba(0, 0, 0, 0.1);
-      border: 0;
+      width: 300px;
+      height: 45px;
       border-radius: 4px;
-      height: 44px;
+      border: solid 1px #dddddd;
       padding: 0 15px;
-      color: #fff;
       margin: 0 0 10px;
+      background-color: #ffffff;
 
       &::placeholder {
-        color: rgba(255, 255, 255, 0.7);
+        color: #999999;
       }
     }
 
     button {
       margin: 5px 0 0;
-      height: 44px;
-      background: #3b9eff;
+      width: 300px;
+      height: 45px;
+      border-radius: 4px;
+      background-color: #ee4d64;
+
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -45,7 +66,7 @@ export const Content = styled.div`
       transition: background 0.2s;
 
       &:hover {
-        background: ${darken(0.03, '#eb9eff')};
+        background: ${darken(0.1, '#ee4d64')};
       }
     }
 
