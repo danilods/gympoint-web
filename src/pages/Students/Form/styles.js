@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 50px auto;
 
   display: flex;
@@ -25,19 +25,6 @@ export const Actions = styled.div`
     font-weight: bold;
   }
 
-  input {
-    width: 237px;
-    height: 36px;
-    border-radius: 4px;
-    border: solid 1px #dddddd;
-    background-color: #ffffff;
-
-    &::placeholder {
-      color: #999999;
-      margin-left: 15px;
-    }
-  }
-
   button {
     width: 142px;
     height: 36px;
@@ -55,26 +42,47 @@ export const Content = styled.div`
   padding: 20px 15px;
   background: #fff;
   border-radius: 4px;
-`;
 
-export const Table = styled.table`
-  width: 100%;
-  padding: 12px 30px 5px 12px;
+  display: flex;
+  flex-direction: column;
 
-  thead th {
+  label {
+    width: 300px;
+    height: 75px;
     text-align: left;
-    padding: 12px 2px 5px 2px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #444444;
   }
 
-  tbody td {
-    padding: 25px 2px 5px 2px;
-    border-bottom: 1px solid #eee;
-    a {
-      color: #4d85ee;
+  input #initialFields {
+    width: 800px;
+    height: 45px;
+    border-radius: 4px;
+    border: solid 1px #dddddd;
+    padding: 0 15px;
+    margin: 0 0 10px;
+    background-color: #ffffff;
+
+    &::placeholder {
+      color: #999999;
     }
   }
 
-  th#delete-column {
-    width: 10px;
+  input {
+    width: 100%;
+    height: 45px;
+    border-radius: 4px;
+    border: solid 1px #dddddd;
+    padding: 0 15px;
+    margin: 0 0 10px;
+    background-color: #ffffff;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
   }
 `;
