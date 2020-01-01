@@ -9,7 +9,11 @@ import Students from '../pages/Students';
 import StudentsForm from '../pages/Students/Form';
 
 import Plans from '../pages/Plans';
+import PlansForm from '../pages/Plans/Form';
+
 import Enrollments from '../pages/Enrollments';
+import EnrollmentsForm from '../pages/Enrollments/Form';
+
 import Helpers from '../pages/Helpers';
 
 import Profile from '../pages/Profile';
@@ -24,7 +28,16 @@ export default function Routes() {
       <Route path="/students-create" exact component={StudentsForm} isPrivate />
 
       <Route path="/plans" exact component={Plans} isPrivate />
+      <Route path="/plans-create" exact component={PlansForm} isPrivate />
+
       <Route path="/enrollments" exact component={Enrollments} isPrivate />
+      <Route
+        path="/enrollments-create"
+        exact
+        component={EnrollmentsForm}
+        isPrivate
+      />
+
       <Route path="/helpers" exact component={Helpers} isPrivate />
 
       <Route path="/profile" exact component={Profile} isPrivate />

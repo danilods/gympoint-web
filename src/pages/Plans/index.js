@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { formatPrice } from '../../util/format';
+
+import api from '../../services/api';
 
 import { Container, Table, Content, Actions } from './styles';
 
 export default function Plans() {
+  const [plans, setPlans] = useState([]);
+
+  useEffect(() => {
+    async function loadPlans() {
+      const response = await api.get('plans');
+      const data = response.data.map(plan => ({
+        ...plan,
+        priceFormatted: formatPrice(plan.price)
+      }));
+      setPlans(data);
+    }
+    loadPlans();
+  }, []);
+
   return (
     <Container>
       <Actions>
         <h1>Gerenciando planos</h1>
         <div>
-          <button type="button"> + Cadastrar</button>
+          <Link to="/plans-create">
+            <button type="button"> + Cadastrar</button>
+          </Link>
         </div>
       </Actions>
       <Content>
@@ -24,86 +44,16 @@ export default function Plans() {
             </tr>
           </thead>
           <tbody>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
+            {plans.map(plan => (
+              <tr key={plan.id}>
+                <td>{plan.title}</td>
+                <td>{plan.duration} meses</td>
+                <td>{plan.priceFormatted} </td>
 
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
-            <tr key="">
-              <td>Gold</td>
-              <td>1 mês</td>
-              <td>R$129.00</td>
-
-              <td align="right">editar</td>
-              <td align="left">apagar</td>
-            </tr>
+                <td align="right">editar</td>
+                <td align="left">apagar</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </Content>

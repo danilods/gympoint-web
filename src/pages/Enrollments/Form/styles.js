@@ -55,6 +55,22 @@ export const Content = styled.div`
     color: #444444;
   }
 
+  select {
+    margin-top: 8px !important;
+    padding: 0 15px;
+    margin: 0 0 10px;
+    height: 37px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+
+    &::placeholder {
+      color: #999999;
+    }
+  }
+
+
+
   input {
     margin-top: 8px !important;
     padding: 0 15px;
@@ -74,9 +90,8 @@ export const Content = styled.div`
     flex-direction: column;
     align-items: flex-start;
 
-    input {
-      width: 970px;
-    }
+
+  }
 
     label {
       display: block;
@@ -87,6 +102,8 @@ export const Content = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-right: 10px;
+
     label {
       display: block;
     }
