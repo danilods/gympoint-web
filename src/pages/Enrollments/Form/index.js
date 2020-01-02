@@ -1,84 +1,124 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import Select from 'react-select';
+import { addMonths, format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+
+import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
 
-import { Form, Input, useField } from '@rocketseat/unform';
+import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
-import AsyncSelect from 'react-select/async';
+import Select from '../../../components/Selects';
+import DatePicker from '../../../components/Datepicker';
+import { formatPrice } from '../../../util/format';
 
 import * as action from '../../../store/modules/enrollments/actions';
 
-import { Container, Content, Actions } from './styles';
-
-const options = [
-  { id: 1, title: 'ReactJS' },
-  { id: 2, title: 'NodeJS' },
-  { id: 3, title: 'React Native' }
-];
-
-const plans = [
-  { id: 1, title: 'ReactJS' },
-  { id: 3, title: 'NodeJS' },
-  { id: 4, title: 'React Native' }
-];
+import { Container, Column, Row, Field, Actions } from './styles';
 
 export default function EnrollmentsForm() {
   const dispatch = useDispatch();
 
+  const [plan, setPlans, enrollment, setEnrollment] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [
+    endDate,
+    setEndDate,
+    totalPrice,
+    setTotalPrice,
+    enrollmentDuration,
+    setEnrollmentDuration
+  ] = useState('');
+  const [startDate, setStartDate, planSelected, setPlanSelected] = useState();
+
   const schema = Yup.object().shape({
-    name: Yup.string().required('O nome é obrigatório'),
-    plan: Yup.string().required('campo duração é obrigatório'),
-    start_date: Yup.date().required('Preço mensal é obrigatório')
+    student_id: Yup.number()
+      .integer()
+      .typeError('O campo aluno é obrigatório!')
+      .required('Nome do aluno é obrigatório!'),
+    plan_id: Yup.number()
+      .integer()
+      .typeError('O Campo plano é obrigatório!')
+      .required('O Campo plano é obrigatório!'),
+    start_date: Yup.date()
+      .typeError('A data inicial é obrigatória!')
+      .required('A data inicial é obrigatória!')
   });
+
+  const totalPriceCalc = useMemo(() => {
+    return formatPrice(enrollmentDuration * totalPrice);
+  }, [enrollmentDuration, totalPrice]);
+
+  const getEndDate = useMemo(() => {
+    if (startDate && enrollmentDuration) {
+      const futureDate = addMonths(startDate, enrollmentDuration);
+      return format(futureDate, 'dd/MM/yyy', { locale: pt });
+    }
+    return 0;
+  }, [startDate, enrollmentDuration]);
+
+  async function loadPlans() {
+    const response = await api.get('plans');
+
+    setPlans(response.data);
+  }
 
   function handleSubmit(data) {
     console.tron.error(data);
     dispatch(action.createEnrollmentRequest(data));
   }
 
+  function handleEdit(data) {}
+
   return (
     <>
       <Container>
-        <Form schema={schema} onSubmit={handleSubmit}>
+        <Form schema={schema}>
+          <div>
+            <header>
+              <strong />
+              <div />
+            </header>
+          </div>
           <Actions>
-            <h1>Cadastro de matrícula</h1>
+            <h1>Cadastro de plano</h1>
             <div>
-              <button type="submit">Salvar</button>
-              <Link to="/plans">VOLTAR</Link>
+              <Link to="/enrollments">
+                <MdKeyboardArrowLeft size={20} color="#fff" />
+                VOLTAR
+              </Link>
+              <button type="submit">
+                <MdDone size={20} color="#fff" />
+                SALVAR
+              </button>
             </div>
           </Actions>
-          <Content>
-            <div />
-            <div className="rowForms">
-              <label htmlFor="name">
-                ALUNO
-                <ReactSelect name="name" options={options} />
-              </label>
-            </div>
-            <div>
-              <label htmlFor="plan">
-                PLANO
-                <div className="selectElement">
-                  <ReactSelect name="plan" options={plans} />
-                </div>
-              </label>
-              <label htmlFor="start">
-                DATA DE INÍCIO
-                <Input name="startDate" type="text" />
-              </label>
 
-              <label htmlFor="endDate">
-                DATA DE TÉRMINO
-                <Input name="endDate" type="text" />
-              </label>
-              <label htmlFor="totalPrice">
-                PREÇO TOTAL
-                <Input name="totalPrice" type="text" disabled />
-              </label>
-            </div>
-          </Content>
+          <Column>
+            <Field nospace>
+              <strong>Aluno</strong>
+              <Select name="student_id" placeholder="Buscar aluno" />
+            </Field>
+            <Row>
+              <Field nospace>
+                <strong>Plano</strong>
+                <Select name="plan_id" placeholder="Selecione o plano" />
+              </Field>
+              <Field>
+                <strong>Data de início</strong>
+                <DatePicker name="start_date" placeholder="Escolha a data" />
+              </Field>
+              <Field>
+                <strong>Data de término</strong>
+                <Input name="end_date" disabled />
+              </Field>
+              <Field>
+                <strong>Valor Total</strong>
+                <Input name="price" disabled />
+              </Field>
+            </Row>
+          </Column>
         </Form>
       </Container>
     </>

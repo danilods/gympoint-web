@@ -2,12 +2,46 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  max-width: 1000px;
+  max-width: 900px;
   margin: 50px auto;
-
   display: flex;
   flex-direction: column;
 `;
+
+export const Column = styled.div`
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  strong {
+    margin-top: 24px;
+  }
+
+  input {
+    height: 37px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+
+    &::placeholder {
+      color: #999999;
+    }
+  }
+`;
+
+export const Field = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: ${props => (props.nospace ? '0px' : '15px')};
+`;
+
 export const Actions = styled.div`
   margin-bottom: 10px;
   display: flex;
@@ -34,78 +68,6 @@ export const Actions = styled.div`
     color: #fff;
     &:hover {
       background: ${darken(0.05, '#de3b3b')};
-    }
-  }
-`;
-
-export const Content = styled.div`
-  padding: 20px 15px;
-  background: #fff;
-  border-radius: 4px;
-
-  display: flex;
-  flex-direction: column;
-
-  label {
-    width: 300px;
-    height: 75px;
-    text-align: left;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #444444;
-  }
-
-  select {
-    margin-top: 8px !important;
-    padding: 0 15px;
-    margin: 0 0 10px;
-    height: 37px;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-
-    &::placeholder {
-      color: #999999;
-    }
-  }
-
-
-
-  input {
-    margin-top: 8px !important;
-    padding: 0 15px;
-    margin: 0 0 10px;
-    height: 37px;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-
-    &::placeholder {
-      color: #999999;
-    }
-  }
-
-  div.rowForms {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-
-  }
-
-    label {
-      display: block;
-    }
-  }
-
-  div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 10px;
-
-    label {
-      display: block;
     }
   }
 `;

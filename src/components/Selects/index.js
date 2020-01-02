@@ -38,9 +38,11 @@ export default function ReactSelect({
     if (!defaultValue) return null;
 
     if (!multiple) {
+      // eslint-disable-next-line react/prop-types
       return options.find(option => option.id === defaultValue);
     }
 
+    // eslint-disable-next-line react/prop-types
     return options.filter(option => defaultValue.includes(option.id));
   }
 
